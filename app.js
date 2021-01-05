@@ -6,6 +6,7 @@ var mysql = require('mysql')
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+    port: '3308',
     password: '',
     database: 'node_crud'
 })
@@ -76,8 +77,6 @@ app.post('/addprod', function(req, res, next) {
     let prix = req.body.prix;
     let categorie = req.body.categ;
     let errors = false;
-
-
     if (!errors) {
 
 
@@ -255,6 +254,7 @@ app.get('/delete/(:id)', function(req, res, next) {
 app.get('/delete/cat/(:id)', function(req, res, next) {
     let id = req.params.id;
     connection.query('DELETE FROM category WHERE id = ' + id, function(err, result) {
+
         if (err) {
 
             res.redirect('/category')

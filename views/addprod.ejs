@@ -5,20 +5,20 @@
 
         <form method="POST" action="/addprod" class="form">
             <div class="form-group">
-                <label>Nom du Produit</label>
-                <input placeholder="nom" name="nom" class="input" id="nom" type="text" required>
+                <label>Name Of The Product</label>
+                <input placeholder="name" name="nom" class="input" id="nom" type="text" required>
             </div>
 
 
             <div class="form-group">
-                <label>Prix (DH)</label>
-                <input placeholder="prix" name="prix" class="input" id="age" type="number" required>
+                <label>Price (DH)</label>
+                <input placeholder="price" name="prix" class="input" id="age" type="number" required>
             </div>
 
 
 
             <div class="form-group">
-                <label>Categorie:</label>
+                <label>Category:</label>
                 <select name="categ" class="input" required>
                     <% category.forEach(function (cat) { %>
 
@@ -26,7 +26,7 @@
 
                     <% }) %>
                 </select>
-                <a class="but" href="/addcat">Add Categorie</a>
+                <a class="but" href="/addcat">Add Category</a>
 
             </div>
 
@@ -34,7 +34,7 @@
             <input class="but" type="submit" value="Add">
 
         </form>
-        <a href="/" class="add">/Produits</a>
+        <a href="/" class="add">/Product</a>
 
 
     </div>
