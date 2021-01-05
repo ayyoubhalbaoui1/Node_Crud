@@ -1,12 +1,13 @@
+// All dependencies
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 var mysql = require('mysql')
 
+//Database Connection informations
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3308',
     password: '',
     database: 'node_crud'
 })
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs');
 
 
+//Product read function
 var obj = {};
 app.get('/', function(req, rep) {
     connection.query('SELECT product.*, category.catname FROM product  JOIN category  ON product.id_category = category.id', function(err, result) {
@@ -31,12 +33,12 @@ app.get('/', function(req, rep) {
 })
 
 
-
+//Redirect to add category page
 app.get('/addcat', function(req, rep) {
     rep.render('addcat');
 })
 
-
+//Category read function
 app.get('/category', function(req, rep) {
     connection.query('SELECT * FROM category', function(err, result) {
         if (err) {
@@ -50,7 +52,7 @@ app.get('/category', function(req, rep) {
     });
 })
 
-
+//Function to display categories in add product page
 app.get('/addprod', function(req, rep) {
 
 
@@ -70,7 +72,7 @@ app.get('/addprod', function(req, rep) {
 
 
 
-
+//Product create function
 app.post('/addprod', function(req, res, next) {
     let id = null;
     let nom = req.body.nom;
@@ -113,7 +115,7 @@ app.post('/addprod', function(req, res, next) {
 
 
 
-
+//Category create function
 app.post('/addcat', function(req, res, next) {
 
     let id = null;
@@ -153,7 +155,7 @@ app.post('/addcat', function(req, res, next) {
 
 
 
-
+//Product Update function (get and post to update)
 app.get('/updateproduct/:id', function(req, rep, next) {
 
     let id = req.params.id
@@ -193,7 +195,7 @@ app.post('/updateproduct/:id', (req, res) => {
 })
 
 
-
+//Category Update function (get and post to update)
 app.get('/updatecategory/:id', function(req, res) {
 
     let catId = req.params.id
@@ -235,7 +237,7 @@ app.post('/updatecategory/:id', (req, res) => {
 
 
 
-
+// Product Delete function
 app.get('/delete/(:id)', function(req, res, next) {
     let id = req.params.id;
     connection.query('DELETE FROM product WHERE id = ' + id, function(err, result) {
@@ -250,7 +252,7 @@ app.get('/delete/(:id)', function(req, res, next) {
 })
 
 
-
+// Category Delete function
 app.get('/delete/cat/(:id)', function(req, res, next) {
     let id = req.params.id;
     connection.query('DELETE FROM category WHERE id = ' + id, function(err, result) {
@@ -269,7 +271,7 @@ app.get('/delete/cat/(:id)', function(req, res, next) {
 
 
 
-
+//Database Connection
 connection.connect((err) => {
     if (!err)
         console.log('DB connection succeded.')
